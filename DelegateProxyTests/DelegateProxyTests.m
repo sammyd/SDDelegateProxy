@@ -13,6 +13,7 @@
 
 @implementation DelegateProxyTests {
     id<SDSampleDelegate> sampleDelegate;
+    id<SDSampleDelegate> delegateProxy;
 }
 
 - (void)setUp
@@ -21,6 +22,7 @@
     
     // Set-up code here.
     sampleDelegate = [[SDSampleDelegateImplementation alloc] init];
+    delegateProxy = (id<SDSampleDelegate>)[[SDDelegateProxy alloc] initWithDelegate:sampleDelegate];
 }
 
 - (void)tearDown
@@ -44,6 +46,10 @@
     SDDelegateProxy *proxy = [[SDDelegateProxy alloc] initWithDelegate:sampleDelegate];
     STAssertEquals(proxy.delegate, sampleDelegate, @"Constructor should correctly keep reference to delegate");
 }
+
+
+#pragma mark - Void Methods
+
 
 
 @end
