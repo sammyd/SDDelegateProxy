@@ -17,6 +17,7 @@
     id<SDSampleDelegate> sampleFullDelegate;
     id<SDSampleDelegate> sampleEmptyDelegate;
     id<SDSampleDelegate> delegateProxy;
+    id<SDSampleDelegate> emptyDelegateProxy;
 }
 
 - (void)setUp
@@ -28,6 +29,7 @@
     delegateProxy = (id<SDSampleDelegate>)[[SDDelegateProxy alloc] initWithDelegate:mockDelegate];
     sampleEmptyDelegate = [[SDSampleDelegateEmptyImplementation alloc] init];
     sampleFullDelegate = [[SDSampleDelegateFullImplementation alloc] init];
+    emptyDelegateProxy = (id<SDSampleDelegate>)[[SDDelegateProxy alloc] initWithDelegate:sampleEmptyDelegate];
 }
 
 - (void)tearDown
@@ -51,6 +53,11 @@
     STAssertEquals(proxy.delegate, mockDelegate, @"Constructor should correctly keep reference to delegate");
 }
 
+- (void)test_CreateProxyWithNilDelegateThrows
+{
+    STAssertThrows([[SDDelegateProxy alloc] initWithDelegate:nil], @"It shouldn't be possible to create a proxy of a nil object");
+}
+
 
 #pragma mark - Void Methods
 - (void)test_InvalidVoidMethod_ShouldNotRespondToSelector
@@ -66,8 +73,7 @@
 
 - (void)test_ValidVoidMethod_WithoutImplementation_ShouldNotRespondToSelector
 {
-    delegateProxy = (id<SDSampleDelegate>)[[SDDelegateProxy alloc] initWithDelegate:sampleEmptyDelegate];
-    STAssertFalse([delegateProxy respondsToSelector:@selector(voidDelegateMethod)], @"respondsToSelector should be NO for valid methods without implementations");
+    STAssertFalse([emptyDelegateProxy respondsToSelector:@selector(voidDelegateMethod)], @"respondsToSelector should be NO for valid methods without implementations");
 }
 
 - (void)test_InvalidVoidMethod_ShouldThrow
@@ -78,8 +84,7 @@
 - (void)test_ValidVoidMethod_WithoutImplementation_ShouldNotThrow
 {
     // Can't do this one with a mock. Let's use our sample implementation
-    delegateProxy = (id<SDSampleDelegate>)[[SDDelegateProxy alloc] initWithDelegate:sampleEmptyDelegate];
-    STAssertNoThrow([delegateProxy voidDelegateMethod], @"Non-implemented valid void method should not throw");
+    STAssertNoThrow([emptyDelegateProxy voidDelegateMethod], @"Non-implemented valid void method should not throw");
 }
 
 - (void)test_ValidVoidMethod_WithImplementation_ShouldNotThrow
@@ -93,9 +98,62 @@
 - (void)test_ValidVoidMethodWithArgument_WithImplementation_ShouldPassArgumentCorrectly
 {
     [[mockDelegate expect] voidDelegateMethodWithArgument:self];
-    STAssertNoThrow([delegateProxy voidDelegateMethodWithArgument:self], @"");
+    STAssertNoThrow([delegateProxy voidDelegateMethodWithArgument:self], @"Arguments should be passed through correctly");
     [mockDelegate verify];
 }
 
+#pragma mark - Non-void return types
+- (void)test_ObjectReturnType_Implemented_ReturnsCorrectObject
+{
+    [[[mockDelegate expect] andReturn:self] delegateMethodWithObjectReturnType];
+    STAssertEquals(self, [delegateProxy delegateMethodWithObjectReturnType], @"Implemented object return should proxy");
+    [mockDelegate verify];
+}
+
+- (void)test_ObjectReturnType_NotImplemented_ReturnsNil
+{
+    STAssertNil([emptyDelegateProxy delegateMethodWithObjectReturnType], @"Not-implemented object return should be nil");
+}
+
+- (void)test_IntegerReturnType_Implemented_ReturnsCorrectValue
+{
+    [[[mockDelegate expect] andReturnValue:OCMOCK_VALUE((int){12})] delegateMethodWithIntegerReturnType];
+    STAssertEquals((int)12, [delegateProxy delegateMethodWithIntegerReturnType], @"Implemented int return should proxy");
+    [mockDelegate verify];
+}
+
+- (void)test_IntegerReturnType_NotImplemeted_ReturnsZero
+{
+    STAssertEquals((int)0, [emptyDelegateProxy delegateMethodWithIntegerReturnType], @"Not-implemented integer return should be 0");
+}
+
+- (void)test_FloatReturnType_Implemented_ReturnsCorrectValue
+{
+    [[[mockDelegate expect] andReturnValue:OCMOCK_VALUE((float){3.5})] delegateMethodWithFloatReturnType];
+    STAssertEquals((float)3.5, [delegateProxy delegateMethodWithFloatReturnType], @"Implemented float return should proxy");
+    [mockDelegate verify];
+}
+
+- (void)test_FloatReturnType_NotImplemented_ReturnsZero
+{
+    STAssertTrue([emptyDelegateProxy delegateMethodWithFloatReturnType] == 0, @"Not-implemented float should return 0");
+}
+
+- (void)test_StructReturnType_NotImplemented_ReturnsEmptyStruct
+{
+    STAssertTrue(CGPointEqualToPoint([emptyDelegateProxy delegateMethodWithStructReturnType], CGPointMake(0, 0)), @"Not-implemented struct return type returns struct with appropriate empty values");
+}
+
+- (void)test_BoolReturnType_Implemented_ReturnsCorrectValue
+{
+    [[[mockDelegate expect] andReturnValue:OCMOCK_VALUE((BOOL){YES})] delegateMethodWithBoolReturnType];
+    STAssertTrue([delegateProxy delegateMethodWithBoolReturnType], @"Implemneted BOOL return should proxy");
+    [mockDelegate verify];
+}
+
+- (void)test_BoolReturnType_NotImplemented_ReturnsNo
+{
+    STAssertFalse([emptyDelegateProxy delegateMethodWithBoolReturnType], @"Default value for boolean return type should be NO");
+}
 
 @end

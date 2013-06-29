@@ -14,6 +14,14 @@
 - (void)voidDelegateMethod;
 - (void)voidDelegateMethodWithArgument:(id)argument;
 
+- (id)delegateMethodWithObjectReturnType;
+
+- (BOOL)delegateMethodWithBoolReturnType;
+- (CGFloat)delegateMethodWithFloatReturnType;
+- (NSInteger)delegateMethodWithIntegerReturnType;
+- (CGPoint)delegateMethodWithStructReturnType;
+
+
 @end
 
 
