@@ -24,6 +24,7 @@
 		2257F6CB177F761900E4449D /* SDDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2257F6CA177F761900E4449D /* SDDelegateProxy.m */; };
 		2257F6CC177F761900E4449D /* SDDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2257F6CA177F761900E4449D /* SDDelegateProxy.m */; };
 		2257F6D1177F76D600E4449D /* SDSampleDelegateImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2257F6D0177F76D600E4449D /* SDSampleDelegateImplementation.m */; };
+		294EED0E5EA4453794991641 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C75665ED7BE4088A7F0C276 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,8 @@
 		2257F6CE177F766E00E4449D /* SDSampleDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDSampleDelegate.h; sourceTree = "<group>"; };
 		2257F6CF177F76D600E4449D /* SDSampleDelegateImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSampleDelegateImplementation.h; sourceTree = "<group>"; };
 		2257F6D0177F76D600E4449D /* SDSampleDelegateImplementation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSampleDelegateImplementation.m; sourceTree = "<group>"; };
+		7C75665ED7BE4088A7F0C276 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F96D99A762BB408AA49C3934 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +74,7 @@
 				2257F695177F755800E4449D /* UIKit.framework in Frameworks */,
 				2257F697177F755800E4449D /* Foundation.framework in Frameworks */,
 				2257F699177F755800E4449D /* CoreGraphics.framework in Frameworks */,
+				294EED0E5EA4453794991641 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +98,7 @@
 				2257F6B8177F755900E4449D /* DelegateProxyTests */,
 				2257F693177F755800E4449D /* Frameworks */,
 				2257F692177F755800E4449D /* Products */,
+				F96D99A762BB408AA49C3934 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -113,6 +118,7 @@
 				2257F696177F755800E4449D /* Foundation.framework */,
 				2257F698177F755800E4449D /* CoreGraphics.framework */,
 				2257F6B2177F755900E4449D /* SenTestingKit.framework */,
+				7C75665ED7BE4088A7F0C276 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -180,9 +186,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2257F6C3177F755900E4449D /* Build configuration list for PBXNativeTarget "DelegateProxy" */;
 			buildPhases = (
+				8E786A8C398543E4BAB67D7C /* Check Pods Manifest.lock */,
 				2257F68D177F755800E4449D /* Sources */,
 				2257F68E177F755800E4449D /* Frameworks */,
 				2257F68F177F755800E4449D /* Resources */,
+				C927BC1162994F97A999AF15 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -275,6 +283,34 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		8E786A8C398543E4BAB67D7C /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+		};
+		C927BC1162994F97A999AF15 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -387,6 +423,7 @@
 		};
 		2257F6C4177F755900E4449D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F96D99A762BB408AA49C3934 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DelegateProxy/DelegateProxy-Prefix.pch";
@@ -398,6 +435,7 @@
 		};
 		2257F6C5177F755900E4449D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F96D99A762BB408AA49C3934 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DelegateProxy/DelegateProxy-Prefix.pch";
@@ -409,6 +447,7 @@
 		};
 		2257F6C7177F755900E4449D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F96D99A762BB408AA49C3934 /* Pods.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DelegateProxy.app/DelegateProxy";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -420,12 +459,14 @@
 				INFOPLIST_FILE = "DelegateProxyTests/DelegateProxyTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
 		2257F6C8177F755900E4449D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F96D99A762BB408AA49C3934 /* Pods.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DelegateProxy.app/DelegateProxy";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -437,6 +478,7 @@
 				INFOPLIST_FILE = "DelegateProxyTests/DelegateProxyTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
@@ -460,6 +502,7 @@
 				2257F6C5177F755900E4449D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2257F6C6177F755900E4449D /* Build configuration list for PBXNativeTarget "DelegateProxyTests" */ = {
 			isa = XCConfigurationList;
@@ -468,6 +511,7 @@
 				2257F6C8177F755900E4449D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

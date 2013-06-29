@@ -9,7 +9,7 @@
 #import "DelegateProxyTests.h"
 #import "SDDelegateProxy.h"
 #import "SDSampleDelegate.h"
-#import "SDSampleDelegateImplementation.h"
+#import <OCMock/OCMock.h>
 
 @implementation DelegateProxyTests {
     id<SDSampleDelegate> sampleDelegate;
@@ -21,7 +21,7 @@
     [super setUp];
     
     // Set-up code here.
-    sampleDelegate = [[SDSampleDelegateImplementation alloc] init];
+    sampleDelegate = [OCMockObject mockForProtocol:@protocol(SDSampleDelegate)];
     delegateProxy = (id<SDSampleDelegate>)[[SDDelegateProxy alloc] initWithDelegate:sampleDelegate];
 }
 
