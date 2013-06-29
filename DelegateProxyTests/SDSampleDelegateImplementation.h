@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "SDSampleDelegate.h"
 
-@interface SDSampleDelegateImplementation : NSObject <SDSampleDelegate>
+@interface SDSampleDelegateFullImplementation : NSObject <SDSampleDelegate>
+@end
 
+@interface SDSampleDelegateEmptyImplementation : NSObject <SDSampleDelegate>
 @end

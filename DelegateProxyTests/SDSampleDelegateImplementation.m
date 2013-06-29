@@ -8,6 +8,25 @@
 
 #import "SDSampleDelegateImplementation.h"
 
-@implementation SDSampleDelegateImplementation
+@implementation SDSampleDelegateEmptyImplementation
+
+@end
+
+@implementation SDSampleDelegateFullImplementation
+
+- (void)voidDelegateMethod
+{
+    
+}
+
+- (void)voidDelegateMethodWithObjectArgument:(id)argument
+{
+    
+}
+
+- (void)voidDelegateMethodWithPrimitiveArgument:(int)argument
+{
+    
+}
 
 @end

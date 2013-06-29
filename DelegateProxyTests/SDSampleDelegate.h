@@ -12,7 +12,18 @@
 
 @optional
 - (void)voidDelegateMethod;
-- (void)voidDelegateMethodWithPrimitiveArgument:(int)argument;
-- (void)voidDelegateMethodWithObjectArgument:(id)argument;
+- (void)voidDelegateMethodWithArgument:(id)argument;
+
+@end
+
+
+
+/**
+ This protocol is provided to force the compiler to compile method calls which
+ don't exist on the object
+ */
+@protocol SDInvalidMethodProtocol <NSObject>
+
+- (void)invalidVoidMethod;
 
 @end

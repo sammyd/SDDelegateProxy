@@ -18,4 +18,22 @@
     return self;
 }
 
+- (BOOL)respondsToSelector:(SEL)aSelector
+{    
+    // Let's ask the delegate
+    return [self.delegate respondsToSelector:aSelector];
+}
+
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)sel
+{
+    return [self.delegate methodSignatureForSelector:sel];
+}
+
+- (void)forwardInvocation:(NSInvocation *)invocation
+{
+    if([self.delegate respondsToSelector:invocation.selector]) {
+        [invocation invokeWithTarget:self.delegate];
+    }
+}
+
 @end
