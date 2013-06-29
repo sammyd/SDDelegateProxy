@@ -7,26 +7,43 @@
 //
 
 #import "DelegateProxyTests.h"
+#import "SDDelegateProxy.h"
+#import "SDSampleDelegate.h"
+#import "SDSampleDelegateImplementation.h"
 
-@implementation DelegateProxyTests
+@implementation DelegateProxyTests {
+    id<SDSampleDelegate> sampleDelegate;
+}
 
 - (void)setUp
 {
     [super setUp];
     
     // Set-up code here.
+    sampleDelegate = [[SDSampleDelegateImplementation alloc] init];
 }
 
 - (void)tearDown
 {
     // Tear-down code here.
+    sampleDelegate = nil;
     
     [super tearDown];
 }
 
-- (void)testExample
+
+#pragma mark - Initialisation
+- (void)test_CanCreateProxy
 {
-    STFail(@"Unit tests are not implemented yet in DelegateProxyTests");
+    SDDelegateProxy *proxy = [[SDDelegateProxy alloc] initWithDelegate:sampleDelegate];
+    STAssertNotNil(proxy, @"Can create delegate proxy");
 }
+
+- (void)test_CreatingProxyStoresReferenceToDelegate
+{
+    SDDelegateProxy *proxy = [[SDDelegateProxy alloc] initWithDelegate:sampleDelegate];
+    STAssertEquals(proxy.delegate, sampleDelegate, @"Constructor should correctly keep reference to delegate");
+}
+
 
 @end

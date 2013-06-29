@@ -21,6 +21,9 @@
 		2257F6B5177F755900E4449D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2257F696177F755800E4449D /* Foundation.framework */; };
 		2257F6BD177F755900E4449D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2257F6BB177F755900E4449D /* InfoPlist.strings */; };
 		2257F6C0177F755900E4449D /* DelegateProxyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2257F6BF177F755900E4449D /* DelegateProxyTests.m */; };
+		2257F6CB177F761900E4449D /* SDDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2257F6CA177F761900E4449D /* SDDelegateProxy.m */; };
+		2257F6CC177F761900E4449D /* SDDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2257F6CA177F761900E4449D /* SDDelegateProxy.m */; };
+		2257F6D1177F76D600E4449D /* SDSampleDelegateImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2257F6D0177F76D600E4449D /* SDSampleDelegateImplementation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +56,11 @@
 		2257F6BC177F755900E4449D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2257F6BE177F755900E4449D /* DelegateProxyTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DelegateProxyTests.h; sourceTree = "<group>"; };
 		2257F6BF177F755900E4449D /* DelegateProxyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DelegateProxyTests.m; sourceTree = "<group>"; };
+		2257F6C9177F761900E4449D /* SDDelegateProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDDelegateProxy.h; sourceTree = SOURCE_ROOT; };
+		2257F6CA177F761900E4449D /* SDDelegateProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDDelegateProxy.m; sourceTree = SOURCE_ROOT; };
+		2257F6CE177F766E00E4449D /* SDSampleDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDSampleDelegate.h; sourceTree = "<group>"; };
+		2257F6CF177F76D600E4449D /* SDSampleDelegateImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSampleDelegateImplementation.h; sourceTree = "<group>"; };
+		2257F6D0177F76D600E4449D /* SDSampleDelegateImplementation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSampleDelegateImplementation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +123,8 @@
 				2257F6A3177F755800E4449D /* SDAppDelegate.h */,
 				2257F6A4177F755800E4449D /* SDAppDelegate.m */,
 				2257F69B177F755800E4449D /* Supporting Files */,
+				2257F6C9177F761900E4449D /* SDDelegateProxy.h */,
+				2257F6CA177F761900E4449D /* SDDelegateProxy.m */,
 			);
 			path = DelegateProxy;
 			sourceTree = "<group>";
@@ -136,6 +146,7 @@
 		2257F6B8177F755900E4449D /* DelegateProxyTests */ = {
 			isa = PBXGroup;
 			children = (
+				2257F6CD177F763D00E4449D /* SampleDelegates */,
 				2257F6BE177F755900E4449D /* DelegateProxyTests.h */,
 				2257F6BF177F755900E4449D /* DelegateProxyTests.m */,
 				2257F6B9177F755900E4449D /* Supporting Files */,
@@ -150,6 +161,16 @@
 				2257F6BB177F755900E4449D /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2257F6CD177F763D00E4449D /* SampleDelegates */ = {
+			isa = PBXGroup;
+			children = (
+				2257F6CE177F766E00E4449D /* SDSampleDelegate.h */,
+				2257F6CF177F76D600E4449D /* SDSampleDelegateImplementation.h */,
+				2257F6D0177F76D600E4449D /* SDSampleDelegateImplementation.m */,
+			);
+			name = SampleDelegates;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,6 +285,7 @@
 			files = (
 				2257F6A1177F755800E4449D /* main.m in Sources */,
 				2257F6A5177F755800E4449D /* SDAppDelegate.m in Sources */,
+				2257F6CB177F761900E4449D /* SDDelegateProxy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +294,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2257F6C0177F755900E4449D /* DelegateProxyTests.m in Sources */,
+				2257F6CC177F761900E4449D /* SDDelegateProxy.m in Sources */,
+				2257F6D1177F76D600E4449D /* SDSampleDelegateImplementation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
